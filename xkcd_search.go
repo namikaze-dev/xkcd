@@ -42,8 +42,11 @@ func (sch Searcher) Search(query ...string) []Comic {
 	var matched []Comic
 
 	for _, comic := range sch.comics {
+		title := strings.ToLower(comic.Title)
+		transcript := strings.ToLower(comic.Transcript)
+
 		for _, q := range query {
-			if strings.Contains(comic.Title, q) || strings.Contains(comic.Transcript, q) {
+			if strings.Contains(title, q) || strings.Contains(transcript, q) {
 				matched = append(matched, comic)
 				break
 			}
