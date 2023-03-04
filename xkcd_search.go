@@ -35,12 +35,17 @@ func (sch Searcher) Total() int {
 }
 
 func (sch Searcher) Search(query ...string) []Comic {
+	for i := 0; i < len(query); i++ {
+		query[i] = strings.ToLower(query[i])
+	}
+
 	var matched []Comic
 
 	for _, comic := range sch.comics {
 		for _, q := range query {
 			if strings.Contains(comic.Title, q) || strings.Contains(comic.Transcript, q) {
 				matched = append(matched, comic)
+				break
 			}
 		}
 	}
