@@ -3,6 +3,7 @@ package main_test
 import (
 	"strings"
 	"testing"
+	"fmt"
 
 	"github.com/namikaze-dev/xkcd"
 )
@@ -65,11 +66,11 @@ func TestSearch(t *testing.T) {
 		want int
 	}{
 		{
-			"decisions",
+			"Decisions",
 			1,
 		},
 		{
-			"sleep",
+			"SLEEP",
 			2,
 		},
 		{
@@ -92,11 +93,11 @@ func TestSearch(t *testing.T) {
 		want int
 	}{
 		{
-			[]string{"electric", "sheep"},
+			[]string{"cargo", "sheep"},
 			1,
 		},
 		{
-			[]string{"electric", "computer"},
+			[]string{"Day", "SHEEPCOUNt"},
 			2,
 		},
 		{
@@ -109,7 +110,10 @@ func TestSearch(t *testing.T) {
 		matched := searcher.Search(c.in...)
 		got := len(matched)
 		if c.want != got {
-			t.Errorf("got %v, want %v", got, want)
+			for _, m := range matched {
+				fmt.Println(m.Title)
+			}
+			t.Errorf("got %v, want %v", got, c.want)
 		}
 	}
 }
